@@ -19,6 +19,11 @@ userRouters.put(
   userControllers.updateUser
 );
 userRouters.delete(
+  "/account",
+  authVerify(["user"]),
+  userControllers.deleteAccount
+);
+userRouters.delete(
   "/:id",
   authVerify(["admin", "user"]),
   userControllers.deleteUser

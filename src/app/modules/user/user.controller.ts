@@ -62,6 +62,14 @@ const updateUser = handleAsyncRequest(async (req: any, res) => {
   });
 });
 
+const deleteAccount = handleAsyncRequest(async (req: any, res) => {
+  const result = await userServices.deleteAccount(req.user.email);
+  successResponse(res, {
+    message: "Account deleted successfully!",
+    data: result,
+  });
+});
+
 const deleteUser = handleAsyncRequest(async (req: any, res) => {
   const id = req.params.id;
   const email = req?.user?.email;
@@ -79,6 +87,7 @@ const userControllers = {
   getSingleUser,
   updateUser,
   deleteUser,
+  deleteAccount,
 };
 
 export default userControllers;

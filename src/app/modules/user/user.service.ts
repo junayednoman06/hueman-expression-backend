@@ -227,6 +227,13 @@ const deleteUser = async (_id: string, userEmail: string) => {
   }
 };
 
+const deleteAccount = async (email: string) => {
+  const user = await UserModel.findOne({ email, is_deleted: false });
+  if (!user) throw new AppError(404, "User not found");
+
+  return deleteUser(String(user._id), email);
+};
+
 const userServices = {
   signUp,
   createSubAccount,
@@ -234,6 +241,7 @@ const userServices = {
   getSingleUser,
   updateUser,
   deleteUser,
+  deleteAccount,
   getProfile,
 };
 export default userServices;
